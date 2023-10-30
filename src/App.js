@@ -9,7 +9,7 @@ class App extends Component {
   constructor(props){        // render()보다 먼저 실행되면서 component 값 초기화
     super(props);
     this.state = {          // 내부적으로 사용할 때 state 로 사용
-      mode: 'welcome',
+      mode: 'read',
       subject: {title:'WEB', sub:'world wide web!'},
       welcome: {title:'Welcome', desc: 'Hello, React!'},
       contents: [
@@ -39,8 +39,12 @@ class App extends Component {
           <h1><a href="/" onClick={function(e){
             console.log(e);
             e.preventDefault();
-            alert('hi');
-          }}>{this.state.subject.title}</a></h1>
+            //this.state.mode = 'welcome';   // 이것만 쓰면 this 를 찾을 수 없기 때문에 오류남 -> 뒤에 .bind(this)를 적어줘야함
+                                             //이처럼 값을 바꾼다면 react 입장에서는 몰래바꾸는 식임 -> 화면은 바뀔지언정 렌더링할때 적용 안됨
+            this.setState({                  // setState로 변경하는 값은 객체 형태로 setState해줘야함.
+              mode:'welcome'
+            });
+          }.bind(this)}>{this.state.subject.title}</a></h1>
           {this.state.subject.sub}
         </header>
         <Subject title="React" sub="For UI"></Subject>
