@@ -31,22 +31,14 @@ class App extends Component {
     }
     return (
       <div className="App">
-        {/* <Subject
+        <Subject
           title={this.state.subject.title}
-          sub={this.state.subject.sub}>
-        </Subject> */}
-        <header>
-          <h1><a href="/" onClick={function(e){
-            console.log(e);
-            e.preventDefault();
-            //this.state.mode = 'welcome';   // 이것만 쓰면 this 를 찾을 수 없기 때문에 오류남 -> 뒤에 .bind(this)를 적어줘야함
-                                             //이처럼 값을 바꾼다면 react 입장에서는 몰래바꾸는 식임 -> 화면은 바뀔지언정 렌더링할때 적용 안됨
-            this.setState({                  // setState로 변경하는 값은 객체 형태로 setState해줘야함.
-              mode:'welcome'
-            });
-          }.bind(this)}>{this.state.subject.title}</a></h1>
-          {this.state.subject.sub}
-        </header>
+          sub={this.state.subject.sub}
+          onChangePage={function(){
+            this.setState({mode:'welcome'});
+          }.bind(this)}
+          >
+        </Subject>
         <Subject title="React" sub="For UI"></Subject>
         <TOC data={this.state.contents}></TOC>
         <Content title={_title} desc={_desc}></Content>
