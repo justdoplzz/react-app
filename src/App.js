@@ -53,11 +53,20 @@ class App extends Component {
           contents:this.state.contents
         }); */
         // 2. original 데이터는 바꾸지 않고 추가하는 방법
-        var _contents = this.state.contents.concat(     // concat : 복제본에 새로운데이터를 추가
+        /*var _contents = this.state.contents.concat(     // concat : 복제본에 새로운데이터를 추가
           {id:this.max_content_id, title:_title, desc:_desc}
         )
         this.setState({
           contents:_contents
+        });*/
+        // 3. Array.from 을 사용하여 push 를 사용하지만 original 데이터는 바꾸지 않는 방법
+        // (+ 객체인경우 Object.assign() 사용)
+        var newContents = Array.from(this.state.contents);
+        newContents.push(
+          {id:this.max_content_id, title:_title, desc:_desc}
+        );
+        this.setState({
+          contents:newContents
         });
         console.log(_title, _desc);
       }.bind(this)}></CreateContent>
